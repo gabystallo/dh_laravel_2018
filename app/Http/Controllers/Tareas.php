@@ -8,7 +8,9 @@ class Tareas extends Controller
 {
     public function listar()
     {
-    	return view('tareas.lista');
+        $tareas = ['Tarea 1', 'Tarea 2', 'Otra tarea', 'Otra tarea más'];
+        //$tareas = [];
+    	return view('tareas.lista', compact('tareas'));
     }
     public function verDetalle($tarea)
     {

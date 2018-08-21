@@ -20,6 +20,8 @@ Route::get('/tareas', 'Tareas@listar');
 Route::get('/tareas/{tarea}/detalle', 'Tareas@verDetalle');
 
 
+
+
 Route::get('/peliculas/{id}', 'PeliculasController@buscarPeliculaId');
 
 Route::get('/peliculas/buscar/{nombre}', 'PeliculasController@buscarPeliculaNombre');

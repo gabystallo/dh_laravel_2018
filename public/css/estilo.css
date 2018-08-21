@@ -3,3 +3,6 @@ body { font-family: sans-serif; }
 h1 { font-size:20px; }
 
 .tareas .tarea { margin-bottom:15px; }
+
+.menu { background-color:deepskyblue; }
+.menu li { display:inline-block; padding:4px 6px; }
