@@ -21,20 +21,27 @@ class PeliculasController extends Controller
 		];
 	}
 
+	public function listar()
+	{
+		$peliculas = $this->peliculas;
+		
+		return view('peliculas', compact('peliculas'));
+	}
+
 	public function buscarPeliculaId($id)
 	{
 
-		if(!isset($this->peliculas[$id])) {
+		if(isset($this->peliculas[$id])) {
 
-			$nombre_de_la_pelicula = 'Película inválida';
+			$peliculas = [ $this->peliculas[$id] ];
 
 		} else {
 
-			$nombre_de_la_pelicula = $this->peliculas[$id];
+			$peliculas = [];
 
 		}
 
-		return view('pelicula', compact('nombre_de_la_pelicula'));	
+		return view('peliculas', compact('peliculas'));	
 
 	}
 
