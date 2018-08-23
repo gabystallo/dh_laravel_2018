@@ -10,4 +10,9 @@ class Tarea extends Model
 	protected $table = 'tareas';
 
 
+	public function nombreCompleto()
+	{
+		return $this->descripcion . ' (' . $this->autor . ')';
+	}
+
 }

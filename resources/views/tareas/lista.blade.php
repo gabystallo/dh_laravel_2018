@@ -10,7 +10,7 @@
 	<div class="tareas">
 		@forelse($tareas as $tarea)
 			<div class="tarea">
-				{{ $tarea->descripcion }} ({{ $tarea->autor }})
+				{{ $tarea->nombreCompleto() }}
 			</div>
 		@empty
 			<div class="mensaje">

@@ -17,9 +17,17 @@ Route::get('/', function () {
 
 Route::get('/tareas', 'Tareas@listar');
 
+Route::get('/tareas/crear', 'Tareas@crear');
+
+Route::post('/tareas/crear', 'Tareas@guardar');
+
+Route::get('/tareas/buscar-por-autor/{autor}', 'Tareas@buscarPorAutor');
+
 Route::get('/tareas/primera', 'Tareas@primera');
 
 Route::get('/tareas/{tarea}/detalle', 'Tareas@verDetalle');
+
+
 
 
 

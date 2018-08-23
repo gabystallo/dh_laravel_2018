@@ -13,23 +13,8 @@ class Tareas extends Controller
 
     public function listar()
     {
-        // $tareas = Tarea::where('autor', 'kevin');
+        $tareas = Tarea::all();
 
-        // $tareas = $tareas->where('id', '>=', '3');
-
-        // $tareas = $tareas->get();
-
-        $tareas = Tarea::where('autor', 'kevin')
-            ->orderBy('id', 'desc')
-            ->where('id', '>=', 3)
-
-        ->get();
-
-
-        //$tareas = Tarea::all();
-
-        //$tareas = $this->tareas;
-        //$tareas = [];
     	return view('tareas.lista', compact('tareas'));
     }
 
@@ -40,13 +25,45 @@ class Tareas extends Controller
         return $tarea->descripcion;
     }
 
-
-
-    public function verDetalle($tarea)
+    public function buscarPorAutor($autor)
     {
-    	$dia = date('d/m/Y');    	
-    	
-    	return view('tareas.detalle', compact('tarea', 'dia'));
+        $tareas = Tarea::where('autor', $autor)->get();
 
+        return view('tareas.lista', compact('tareas'));
+    }
+
+
+    public function verDetalle(Tarea $tarea)
+    {
+    	//$tarea = Tarea::findOrFail($tarea);
+
+        return view('tareas.detalle', compact('tarea'));
+
+    }
+
+    public function crear()
+    {
+        return view('tareas.crear');
+    }
+
+    public function guardar(Request $request)
+    {
+
+        $this->validate(
+            $request,
+            [
+                'descripcion' => 'required',
+                'autor' => 'required'
+            ],
+            [
+                'descripcion.required' => 'Eh loco, completá la descripción'
+            ],
+            [
+                'descripcion' => 'descripción'
+            ]
+
+        );
+
+        return 'hola';
     }
 }
