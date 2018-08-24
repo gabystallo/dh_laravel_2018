@@ -43,7 +43,8 @@ class Tareas extends Controller
 
     public function crear()
     {
-        return view('tareas.crear');
+        $tarea = new Tarea;
+        return view('tareas.crear', compact('tarea'));
     }
 
     public function guardar(Request $request)
@@ -52,7 +53,7 @@ class Tareas extends Controller
         $this->validate(
             $request,
             [
-                'descripcion' => 'required',
+                'descripcion' => 'required|max:20',
                 'autor' => 'required'
             ],
             [
@@ -61,9 +62,47 @@ class Tareas extends Controller
             [
                 'descripcion' => 'descripción'
             ]
-
         );
 
-        return 'hola';
+        $tarea = new Tarea;
+        // $tarea->descripcion = $request->input('descripcion');
+        // $tarea->autor = $request->input('autor');
+        $tarea->fill($request->all());
+        $tarea->save();
+
+        return redirect('/tareas');
+    }
+
+    public function editar(Tarea $tarea)
+    {
+        return view('tareas.editar', compact('tarea'));
+    }
+
+    public function actualizar(Tarea $tarea, Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'descripcion' => 'required|max:20',
+                'autor' => 'required'
+            ],
+            [
+                'descripcion.required' => 'Eh loco, completá la descripción'
+            ],
+            [
+                'descripcion' => 'descripción'
+            ]
+        );
+
+        $tarea->fill($request->all());
+        $tarea->save();
+
+        return redirect('/tareas');
+    }
+
+    public function eliminar(Tarea $tarea)
+    {
+        $tarea->delete();
+        return redirect('/tareas');
     }
 }

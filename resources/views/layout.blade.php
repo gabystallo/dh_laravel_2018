@@ -10,6 +10,7 @@
 		<nav>
 			<ul>
 				<li><a href="/tareas">Listado de tareas</a></li>
+				<li><a href="/tareas/crear">Crear tarea</a></li>
 			</ul>
 		</nav>
 	</div>

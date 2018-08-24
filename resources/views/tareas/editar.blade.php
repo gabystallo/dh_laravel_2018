@@ -1,12 +1,12 @@
 @extends('layout')
 
 @section('titulo')
-	Crear tarea nueva
+	Editar una tarea
 @endsection
 
 @section('cuerpo')
 
-<h1>Crear tarea</h1>
+<h1>Editar tarea</h1>
 
 <div class="errores">
 	@foreach($errors->all() as $error)
@@ -15,11 +15,12 @@
 </div>
 
 <form method="post">
-	
+	{{ method_field('put') }}
+
 	@include('tareas._campos')
 
 	<div>
-		<button type="submit">Crear</button>
+		<button type="submit">Guardar</button>
 	</div>
 
 </form>

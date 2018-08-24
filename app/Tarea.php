@@ -8,6 +8,7 @@ class Tarea extends Model
 {
 	
 	protected $table = 'tareas';
+	protected $fillable = ['descripcion', 'autor'];
 
 
 	public function nombreCompleto()

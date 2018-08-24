@@ -21,6 +21,12 @@ Route::get('/tareas/crear', 'Tareas@crear');
 
 Route::post('/tareas/crear', 'Tareas@guardar');
 
+Route::get('/tareas/{tarea}/editar', 'Tareas@editar');
+
+Route::put('/tareas/{tarea}/editar', 'Tareas@actualizar');
+
+Route::delete('/tareas/{tarea}/eliminar', 'Tareas@eliminar');
+
 Route::get('/tareas/buscar-por-autor/{autor}', 'Tareas@buscarPorAutor');
 
 Route::get('/tareas/primera', 'Tareas@primera');
