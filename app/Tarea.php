@@ -10,10 +10,15 @@ class Tarea extends Model
 	protected $table = 'tareas';
 	protected $fillable = ['descripcion', 'autor'];
 
-
-	public function nombreCompleto()
+	public function autor()
 	{
-		return $this->descripcion . ' (' . $this->autor . ')';
+		return $this->belongsTo(Autor::class, 'id_autor');
 	}
+
+	public function etiquetas()
+	{
+		return $this->belongsToMany(Etiqueta::class, 'tareas_etiquetas', 'id_tarea', 'id_etiqueta');
+	}
+
 
 }

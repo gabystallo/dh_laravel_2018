@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/tareas', 'Tareas@listar');
 
+Route::get('/tareas/por-autor/{autor}', 'Tareas@porAutor');
+
 Route::get('/tareas/crear', 'Tareas@crear');
 
 Route::post('/tareas/crear', 'Tareas@guardar');
@@ -27,11 +29,7 @@ Route::put('/tareas/{tarea}/editar', 'Tareas@actualizar');
 
 Route::delete('/tareas/{tarea}/eliminar', 'Tareas@eliminar');
 
-Route::get('/tareas/buscar-por-autor/{autor}', 'Tareas@buscarPorAutor');
-
-Route::get('/tareas/primera', 'Tareas@primera');
-
-Route::get('/tareas/{tarea}/detalle', 'Tareas@verDetalle');
+Route::get('/tareas/{tarea}/ver', 'Tareas@verDetalle')->name('tarea-detalle');
 
 
 

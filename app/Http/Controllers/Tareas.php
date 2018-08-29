@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Tarea;
+use App\Autor;
+use App\Etiqueta;
 
 class Tareas extends Controller
 {
@@ -13,23 +15,12 @@ class Tareas extends Controller
 
     public function listar()
     {
-        $tareas = Tarea::all();
+        //$tareas = Tarea::all();
+        $tareas = Tarea::with('autor')->get();
+
+        //dd($tareas);
 
     	return view('tareas.lista', compact('tareas'));
-    }
-
-    public function primera()
-    {
-        //$tarea = Tarea::first();
-        $tarea = Tarea::find(1);
-        return $tarea->descripcion;
-    }
-
-    public function buscarPorAutor($autor)
-    {
-        $tareas = Tarea::where('autor', $autor)->get();
-
-        return view('tareas.lista', compact('tareas'));
     }
 
 
@@ -37,7 +28,8 @@ class Tareas extends Controller
     {
     	//$tarea = Tarea::findOrFail($tarea);
 
-        return view('tareas.detalle', compact('tarea'));
+        $autor = $tarea->autor;
+        return view('tareas.detalle', compact('tarea', 'autor'));
 
     }
 
@@ -104,5 +96,11 @@ class Tareas extends Controller
     {
         $tarea->delete();
         return redirect('/tareas');
+    }
+
+    public function porAutor(Autor $autor)
+    {
+        $tareas = $autor->tareas;
+        return view('tareas.lista', compact('tareas'));
     }
 }

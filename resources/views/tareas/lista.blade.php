@@ -10,7 +10,9 @@
 	<div class="tareas">
 		@forelse($tareas as $tarea)
 			<div class="tarea">
-				{{ $tarea->nombreCompleto() }}
+				{{ $tarea->descripcion }}
+				({{ $tarea->autor->nombre }})
+				<a href="{{ route('tarea-detalle', compact('tarea')) }}">Ver</a>
 				<a href="/tareas/{{ $tarea->id }}/editar">Editar</a>
 				<form method="post" action="/tareas/{{ $tarea->id }}/eliminar">
 					{{ csrf_field() }}
