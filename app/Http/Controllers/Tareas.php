@@ -15,8 +15,8 @@ class Tareas extends Controller
 
     public function listar()
     {
-        //$tareas = Tarea::all();
-        $tareas = Tarea::with('autor')->get();
+        //$tareas = Tarea::all(); //ESTO NO ES EAGER LOADING
+        $tareas = Tarea::with('autor')->get(); //ESTO ES EAGER LOADING
 
         //dd($tareas);
 
@@ -29,14 +29,16 @@ class Tareas extends Controller
     	//$tarea = Tarea::findOrFail($tarea);
 
         $autor = $tarea->autor;
-        return view('tareas.detalle', compact('tarea', 'autor'));
+        $etiquetas = Etiqueta::orderBy('nombre')->get();
+        return view('tareas.detalle', compact('tarea', 'autor', 'etiquetas'));
 
     }
 
     public function crear()
     {
         $tarea = new Tarea;
-        return view('tareas.crear', compact('tarea'));
+        $autores = Autor::all();
+        return view('tareas.crear', compact('tarea', 'autores'));
     }
 
     public function guardar(Request $request)
@@ -46,7 +48,7 @@ class Tareas extends Controller
             $request,
             [
                 'descripcion' => 'required|max:20',
-                'autor' => 'required'
+                'id_autor' => 'required|exists:autores,id'
             ],
             [
                 'descripcion.required' => 'Eh loco, completá la descripción'
@@ -60,6 +62,7 @@ class Tareas extends Controller
         // $tarea->descripcion = $request->input('descripcion');
         // $tarea->autor = $request->input('autor');
         $tarea->fill($request->all());
+        //$autor->tareas()->save($tarea);
         $tarea->save();
 
         return redirect('/tareas');
@@ -67,7 +70,8 @@ class Tareas extends Controller
 
     public function editar(Tarea $tarea)
     {
-        return view('tareas.editar', compact('tarea'));
+        $autores = Autor::all();
+        return view('tareas.editar', compact('tarea', 'autores'));
     }
 
     public function actualizar(Tarea $tarea, Request $request)
@@ -76,7 +80,7 @@ class Tareas extends Controller
             $request,
             [
                 'descripcion' => 'required|max:20',
-                'autor' => 'required'
+                'id_autor' => 'required|exists:autores,id'
             ],
             [
                 'descripcion.required' => 'Eh loco, completá la descripción'
@@ -102,5 +106,22 @@ class Tareas extends Controller
     {
         $tareas = $autor->tareas;
         return view('tareas.lista', compact('tareas'));
+    }
+
+    public function quitarEtiqueta(Tarea $tarea, Etiqueta $etiqueta)
+    {
+        $tarea->etiquetas()->detach($etiqueta);
+        return back();
+    }
+
+    public function agregarEtiqueta(Tarea $tarea, Request $request)
+    {
+        $etiqueta = Etiqueta::findOrFail($request->input('id_etiqueta'));
+
+        if(!$tarea->etiquetas()->find($etiqueta->id)) {
+            $tarea->etiquetas()->attach($etiqueta);    
+        }
+
+        return back();
     }
 }

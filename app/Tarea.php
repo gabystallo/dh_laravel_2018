@@ -8,7 +8,7 @@ class Tarea extends Model
 {
 	
 	protected $table = 'tareas';
-	protected $fillable = ['descripcion', 'autor'];
+	protected $fillable = ['descripcion', 'id_autor'];
 
 	public function autor()
 	{
