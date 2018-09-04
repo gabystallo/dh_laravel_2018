@@ -25,6 +25,16 @@
 				No hay tareas
 			</div>
 		@endforelse
+
+		{{ $tareas->links() }}
 		
 	</div>
 @endsection
+
+
+
+
+
+
+
+

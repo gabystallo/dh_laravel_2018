@@ -16,9 +16,14 @@ class Tareas extends Controller
     public function listar()
     {
         //$tareas = Tarea::all(); //ESTO NO ES EAGER LOADING
-        $tareas = Tarea::with('autor')->get(); //ESTO ES EAGER LOADING
+        //$tareas = Tarea::with('autor')->get(); //ESTO ES EAGER LOADING
+        $tareas = Tarea::with('autor')->paginate(2);
+        //comando de artisan para publicar una vista de html que viene embebida en el framework
+        //php artisan vendor:publish
 
         //dd($tareas);
+
+        $tareas = $tareas->sortBy('descripcion');
 
     	return view('tareas.lista', compact('tareas'));
     }

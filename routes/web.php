@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/pruebas/colecciones', 'Pruebas@colecciones');
+
+
 Route::get('/tareas', 'Tareas@listar');
 
 Route::get('/tareas/por-autor/{autor}', 'Tareas@porAutor');
@@ -34,6 +38,10 @@ Route::get('/tareas/{tarea}/ver', 'Tareas@verDetalle')->name('tarea-detalle');
 Route::get('/tareas/{tarea}/quitar-etiqueta/{etiqueta}', 'Tareas@quitarEtiqueta')->name('quitar-etiqueta');
 
 Route::put('/tareas/{tarea}/agregar-etiqueta', 'Tareas@agregarEtiqueta')->name('agregar-etiqueta');
+
+
+
+
 
 
 Route::get('/peliculas/listar', 'PeliculasController@listar');
