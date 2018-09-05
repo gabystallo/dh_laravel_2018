@@ -36,4 +36,44 @@ class Pruebas extends Controller
 
     	dd($tareas);
     }
+
+
+
+    public function mostrarFormSubir()
+    {
+    	return view('pruebas.form-subir');
+    }
+
+    public function subir(Request $request)
+    {
+
+    	$this->validate(
+    		$request,
+    		[
+    			'archivo' => 'required|image|mimetypes:image/jpeg|max:2048'
+    		]
+    	);
+    	
+    	$archivo = $request->file('archivo');
+
+    	if($archivo) {
+
+	    	//$archivo->store('carpeta/subcarpeta');
+
+	    	//$archivo->extension()
+	    	//$archivo->getClientOriginalName();
+
+	    	//$nombre = str_random(10) . 'imagen.' . $archivo->extension();
+
+	    	$nombre = 'imagen.jpg';
+
+	    	$archivo->storeAs('public', $nombre);
+	    } else {
+	    	//abort(404);
+	    	return 'errorrrrr';
+	    }
+
+    	return back();
+
+    }
 }

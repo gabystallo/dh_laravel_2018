@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 
 Route::get('/pruebas/colecciones', 'Pruebas@colecciones');
+Route::get('/pruebas/subir', 'Pruebas@mostrarFormSubir');
+Route::post('/pruebas/subir', 'Pruebas@subir');
 
 
 Route::get('/tareas', 'Tareas@listar');
