@@ -48,10 +48,7 @@ Route::put('/tareas/{tarea}/agregar-etiqueta', 'Tareas@agregarEtiqueta')->name('
 
 Route::get('/peliculas/listar', 'PeliculasController@listar');
 
-
 Route::get('/peliculas/{id}', 'PeliculasController@buscarPeliculaId');
-
-
 
 Route::get('/peliculas/buscar/{nombre}', 'PeliculasController@buscarPeliculaNombre');
 

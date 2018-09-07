@@ -50,7 +50,7 @@ class Pruebas extends Controller
     	$this->validate(
     		$request,
     		[
-    			'archivo' => 'required|image|mimetypes:image/jpeg|max:2048'
+    			'archivo' => 'required|image|mimetypes:image/jpeg,image/png|max:2048'
     		]
     	);
     	

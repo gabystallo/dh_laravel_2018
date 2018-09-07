@@ -23,7 +23,7 @@ class Tareas extends Controller
 
         //dd($tareas);
 
-        $tareas = $tareas->sortBy('descripcion');
+        //$tareas = $tareas->sortBy('descripcion');
 
     	return view('tareas.lista', compact('tareas'));
     }
