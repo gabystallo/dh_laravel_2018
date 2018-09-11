@@ -55,3 +55,5 @@ Route::get('/peliculas/buscar/{nombre}', 'PeliculasController@buscarPeliculaNomb
 
 
 
+
+Auth::routes();

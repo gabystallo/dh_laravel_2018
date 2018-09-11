@@ -12,6 +12,15 @@ class Tareas extends Controller
 {
     protected $tareas;
 
+    public function __construct()
+    {
+        // $this->middleware('auth', [
+        //     'except' => ['listar']
+        // ]);
+
+        $this->middleware('auth');
+    }
+
 
     public function listar()
     {
