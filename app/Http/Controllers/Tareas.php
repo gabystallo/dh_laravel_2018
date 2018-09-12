@@ -16,9 +16,14 @@ class Tareas extends Controller
     {
         // $this->middleware('auth', [
         //     'except' => ['listar']
+        //     'only' => ['listar']
         // ]);
 
         $this->middleware('auth');
+        $this->middleware('solo.rol:admin', [
+            'only' => ['crear', 'guardar', 'editar', 'actualizar', 'eliminar']
+        ]);
+
     }
 
 
