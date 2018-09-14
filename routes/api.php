@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('tareas', 'APITareas@lista');
+
+Route::get('tareas/detalle', 'APITareas@detalle');
+
+
+
+

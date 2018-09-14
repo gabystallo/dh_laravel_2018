@@ -20,6 +20,9 @@ Route::get('/pruebas/colecciones', 'Pruebas@colecciones');
 Route::get('/pruebas/subir', 'Pruebas@mostrarFormSubir');
 Route::post('/pruebas/subir', 'Pruebas@subir');
 
+Route::get('/pruebas/api/consultar', 'Pruebas@consultarApi');
+Route::get('/pruebas/api/consultar/con/variables', 'Pruebas@consultarApiConVariables');
+
 
 Route::get('/tareas', 'Tareas@listar');
 

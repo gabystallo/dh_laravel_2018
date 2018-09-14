@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Tarea;
 
+use Ixudra\Curl\Facades\Curl;
+
 class Pruebas extends Controller
 {
     public function colecciones()
@@ -75,5 +77,31 @@ class Pruebas extends Controller
 
     	return back();
 
+    }
+
+
+    public function consultarApi()
+    {
+        //GET https://apis.datos.gob.ar/georef/api/provincias
+        //devuelve listado de provincias en formato JSON
+
+        $provincias = Curl::to('https://apis.datos.gob.ar/georef/api/provincias')
+            ->asJson(true)
+            ->get();
+
+        return view('provincias', compact('provincias'));
+    }
+
+    public function consultarApiConVariables()
+    {
+        $latitud = -34.642922;
+        $longitud = -58.550054;
+
+        $info = Curl::to('https://apis.datos.gob.ar/georef/api/ubicacion')
+            ->asJson(true)
+            ->withData(['lat'=>$latitud, 'lon'=>$longitud])
+            ->get();
+
+        dd($info);
     }
 }
