@@ -1,3 +1,16 @@
+0) loguearme en el servidor
+
+mi proveedor me va a dar:
+
+IP (dirección del servidor)
+usuario: root (master linux)
+password: forugh3tc938y (x ej)
+
+
+ssh usuario@ip (enter)
+
+
+
 
 --------------
 INSTALAR DEPENDENCIAS
@@ -66,6 +79,10 @@ DB_DATABASE=tareas
 DB_USERNAME=usrtareas
 DB_PASSWORD=fe827trx937trb2947tr2
 
+(una vez q ya está todo andando)
+
+APP_DEBUG=false
+
 Ctrl+X (p/salir) y le di guardar cambios
 
 php artisan migrate --seed
@@ -75,4 +92,72 @@ exit (para volver a ser root)
 a2enmod rewrite    (para activar el módulo de reescritura de url's de apache, para que pueda funcionar el router de laravel)
 
 apt-get install libapache2-mpm-itk     (p/instalar el módulo de apache para q este pueda correr distintos sitios con distintos usuarios)
+
+
+nano /etc/apache2/sites-available/010-tareas.conf
+
+adentro puse esta configuración:
+
+<VirtualHost *:80>
+    <IfModule mpm_itk_module>
+        AssignUserId tareas tareas     <-
+    </IfModule>
+    ServerName tareas.axys.com.ar      <-
+    #ServerAlias ....
+    ServerSignature On
+    DocumentRoot "/home/tareas/app/public"      <-
+    <Directory /home/tareas/app/public>         <-
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+        Require all granted
+        DirectoryIndex index.php
+        Options -Indexes
+    </Directory>
+</VirtualHost>
+
+
+--- de nuevo comandos
+
+a2ensite 010-tareas.conf
+
+systemctl restart apache2
+
+
+
+
+
+--------
+actualizar
+--------
+
+1) loguarse en el server
+
+2) loguearse como el usuario de la app
+
+su tareas
+
+3) ir a la carpeta de la app
+
+cd /home/tareas/app
+
+4) actualizar
+
+git pull
+
+y si hace falta:
+
+php artisan migrate
+
+
+
+--------
+material extra
+--------
+
+https://letsencrypt.org/  -> certificados https
+
+https://certbot.eff.org/  -> programa para ubuntu q instala y configura certificados https automáticamente
+
+https://forge.laravel.com   -> sistema que automatiza todo esto
 
