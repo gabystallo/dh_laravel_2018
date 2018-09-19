@@ -1,0 +1,78 @@
+
+--------------
+INSTALAR DEPENDENCIAS
+--------------
+
+apt-get update
+
+apt-get install apache2 php mysql-server libapache2-mod-php
+
+apt-get install php-cli php-xml php-mbstring php-mysql
+
+apt-get install curl git unzip
+
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+apt-get install phpmyadmin (OPCIONAL)
+
+--------
+CREAR BASE DE DATOS CON SU USUARIO
+--------
+
+mysql (esto inicia la consola de mysql)
+[ADENTRO DE LA CONSOLA DE MYSQL]
+
+create database tareas;
+
+create user usrtareas@localhost identified by 'fe827trx937trb2947tr2';
+
+grant all privileges on tareas.* to usrtareas@localhost;
+
+[CERRAR CONSOLA DE MYSQL] (exit)
+
+
+-------
+BAJAR Y CONFIGURAR EL SISTEMA HECHO EN LARAVEL
+-------
+
+adduser tareas
+
+passwd -d tareas
+
+su tareas
+
+cd  (para ir a la home de tareas)
+
+git clone https://github.com/gabystallo/dh_laravel_2018.git
+
+mv dh_laravel_2018 tareas    (para cambiarle el nombre a la carpeta)
+
+--- la carpeta del proyecto es /home/tareas/app
+
+cd app
+
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+
+nano .env
+
+APP_NAME=Tareas
+APP_ENV=production
+APP_URL=http://tareas.axys.com.ar
+DB_DATABASE=tareas
+DB_USERNAME=usrtareas
+DB_PASSWORD=fe827trx937trb2947tr2
+
+Ctrl+X (p/salir) y le di guardar cambios
+
+php artisan migrate --seed
+
+exit (para volver a ser root)
+
+a2enmod rewrite    (para activar el módulo de reescritura de url's de apache, para que pueda funcionar el router de laravel)
+
+apt-get install libapache2-mpm-itk     (p/instalar el módulo de apache para q este pueda correr distintos sitios con distintos usuarios)
+

@@ -26,8 +26,6 @@ Route::get('/pruebas/api/consultar/con/variables', 'Pruebas@consultarApiConVaria
 
 Route::get('/tareas', 'Tareas@listar');
 
-Route::get('/tareas/por-autor/{autor}', 'Tareas@porAutor');
-
 Route::get('/tareas/crear', 'Tareas@crear');
 
 Route::post('/tareas/crear', 'Tareas@guardar');
@@ -39,6 +37,8 @@ Route::put('/tareas/{tarea}/editar', 'Tareas@actualizar');
 Route::delete('/tareas/{tarea}/eliminar', 'Tareas@eliminar');
 
 Route::get('/tareas/{tarea}/ver', 'Tareas@verDetalle')->name('tarea-detalle');
+
+Route::get('/tareas/por-autor/{autor}', 'Tareas@porAutor');
 
 Route::get('/tareas/{tarea}/quitar-etiqueta/{etiqueta}', 'Tareas@quitarEtiqueta')->name('quitar-etiqueta');
 
