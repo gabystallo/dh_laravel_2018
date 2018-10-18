@@ -14,11 +14,12 @@ class APITareas extends Controller
 	function __construct()
 	{
 		$this->middleware('auth:api');
+        $this->middleware('permitir.origen');
 	}
 
     public function lista()
     {
-    	$tareas = Tarea::with('autor')->get();
+    	$tareas = Tarea::with('autor')->with('etiquetas')->get();
 
     	//$tareas = json_encode($tareas);
     	//$tareas = $tareas->toJson();
