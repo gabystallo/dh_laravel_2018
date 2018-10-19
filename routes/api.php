@@ -22,6 +22,8 @@ Route::get('tareas', 'APITareas@lista');
 
 Route::get('tareas/detalle', 'APITareas@detalle');
 
+Route::post('tareas/crear', 'APITareas@crear');
+
 
 
 

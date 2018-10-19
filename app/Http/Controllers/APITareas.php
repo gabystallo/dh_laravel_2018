@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Tarea;
+use App\Autor;
 
 class APITareas extends Controller
 {
@@ -19,7 +20,7 @@ class APITareas extends Controller
 
     public function lista()
     {
-    	$tareas = Tarea::with('autor')->with('etiquetas')->get();
+    	$tareas = Tarea::with('autor')->with('etiquetas')->orderBy('created_at', 'desc')->get();
 
     	//$tareas = json_encode($tareas);
     	//$tareas = $tareas->toJson();
@@ -40,5 +41,17 @@ class APITareas extends Controller
     	$tarea = Tarea::with('autor')->with('etiquetas')->find($id);
 
     	return $tarea;
+    }
+
+    public function crear(Request $request)
+    {
+        $autor = Autor::inRandomOrder()->first();
+
+        $tarea = new Tarea;
+        $tarea->fill($request->all());
+
+        $autor->tareas()->save($tarea);
+
+        return ['resultado' => 'ok'];
     }
 }
